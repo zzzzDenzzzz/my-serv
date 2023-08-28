@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon serv.mjs"
+    "serv": "nodemon serv.js"
   },
   "author": "",
   "license": "ISC",

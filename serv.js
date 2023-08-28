@@ -3,10 +3,12 @@ import { say } from "cowsay";
 import express from "express";
 import path from "path";
 
+// const cow = document.getElementsByTagName("pre");
+// cow.textContent = say({ text: _text, e: eyes, T: tongue });
+
 const PORT = 3000,
   createPath = (page) => path.resolve("view", `${page}.html`),
   app = express(),
-  cow = say({ text: _text, e: eyes, T: tongue }),
   fn = compileFile("./t.pug");
 
 app.listen(PORT);
@@ -16,15 +18,16 @@ app.listen(PORT);
 // });
 app.use(express.static("styles"));
 
-app.get("/", function (req, res) {
-  res.sendFile(createPath("index"));
-});
+// app.get("/", function (req, res) {
+//   res.sendFile(createPath("index"));
+// });
 
-app.get("/add-cow", function (req, res) {
+app.get("/", function (req, res) {
   res.sendFile(createPath("add-cow"));
 });
 
 app.get("/t", function (req, res) {
+  const cow = say({text: "text", e: "Oo", T: "U"});
   res.send(fn({ cow }));
 });
 
@@ -35,5 +38,5 @@ app.post("/add-cow", (req, res) => {
     tongue,
     _text,
   };
-  res.send(createPath("t"), { _post });
+  res.send(createPath(__dirname + "/t"), { _post });
 });
