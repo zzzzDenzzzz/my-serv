@@ -7,6 +7,10 @@ body {
     color: #fff;
 }
 
+h1 {
+    text-transform: uppercase;
+}
+
 form {
     background-color: rgba(0, 0, 0, 0.4);
     padding: 10px 20px;
