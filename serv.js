@@ -12,8 +12,10 @@ const PORT = 3000,
 
 app.listen(PORT);
 
+app.use(express.static('public'));
+
 app.get("/", (req, res) => {
-  const cow = say({e: EYES, T: TONGUE, text: TEXT});
+  let cow = cowSay();
   res.send(fn({ cow }));
 });
 
@@ -21,6 +23,10 @@ app.use("/", bodyParser.urlencoded({ extended: true }));
 
 app.post("/", (req, res) => {
   const { eyes, tongue, text } = req.body;
-  const cow = say({ text: text, e: eyes, T: tongue });
+  let cow = cowSay(text, eyes, tongue);
   res.send(fn({ cow }));
 });
+
+let cowSay = (_text = TEXT, _eyes = EYES, _tongue = TONGUE) => {
+  return say({ text: _text, e: _eyes, T: _tongue });
+};
