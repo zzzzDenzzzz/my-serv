@@ -7,15 +7,15 @@ html
       .form-info-eyes
         label
           | Eyes
-          input(type='text', name='eyes')
+          input(type='text', name='eyes', required)
       .form-info-tongue
         label
           | Tongue
-          input(type='text', name='tongue')
-      .form-text
+          input(type='text', name='tongue', required)
+      .form-info-text
         label
           | Text
-          textarea(name='text')
+          input(type='text', name='text', required)
       .form-button
         input(type='submit', value='Submit')
     pre=cow
