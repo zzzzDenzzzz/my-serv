@@ -1,47 +1,26 @@
 import { compileFile } from "pug";
 import { say } from "cowsay";
 import express from "express";
-import path from "path";
 import bodyParser from "body-parser";
 
-// const cow = document.getElementsByTagName("pre");
-// cow.textContent = say({ text: _text, e: eyes, T: tongue });
-
 const PORT = 3000,
-  createPath = (page) => path.resolve("view", `${page}.html`),
   app = express(),
-  fn = compileFile("./t.pug");
+  fn = compileFile("./t.pug"),
+  TEXT = "Mu-u-u-u-u!!!",
+  EYES = "OO",
+  TONGUE = "U";
 
 app.listen(PORT);
 
-// app.get("/", function (req, res) {
-//   res.send(fn({ cow }));
-// });
-app.use(express.static("styles"));
-app.use("/add-cow", bodyParser.urlencoded({ extended: true }));
-app.post("/add-cow", (req, res) => {
-  console.dir(req.body);
-})
-
-app.get("/", function (req, res) {
-  res.sendFile(createPath("index"));
+app.get("/", (req, res) => {
+  const cow = say({e: EYES, T: TONGUE, text: TEXT});
+  res.send(fn({ cow }));
 });
 
-app.get("/add-cow", function (req, res) {
-  res.sendFile(createPath("add-cow"));
+app.use("/", bodyParser.urlencoded({ extended: true }));
+
+app.post("/", (req, res) => {
+  const { eyes, tongue, text } = req.body;
+  const cow = say({ text: text, e: eyes, T: tongue });
+  res.send(fn({ cow }));
 });
-
-// app.get("/t", function (req, res) {
-//   const cow = say({ text: "text", e: "Oo", T: "U" });
-//   res.send(fn({ cow }));
-// });
-
-// app.post("/add-cow", (req, res) => {
-//   const { eyes, tongue, _text } = req.body;
-//   const _post = {
-//     eyes,
-//     tongue,
-//     _text,
-//   };
-//   res.send(createPath(__dirname + "/t"), { _post });
-// });

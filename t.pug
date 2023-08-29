@@ -2,5 +2,20 @@ doctype html
 html 
   head
   body
-    h1 my page 
-    pre= cow
+    h1 Cowsay page
+    form#post-form(method='post')
+      .form-info-eyes
+        label
+          | Eyes
+          input(type='text', name='eyes')
+      .form-info-tongue
+        label
+          | Tongue
+          input(type='text', name='tongue')
+      .form-text
+        label
+          | Text
+          textarea(name='text')
+      .form-button
+        input(type='submit', value='Submit')
+    pre=cow
